@@ -1,0 +1,11 @@
+diff --git a/submodules/TelegramUI/BUILD b/submodules/TelegramUI/BUILD
+--- a/submodules/TelegramUI/BUILD
++++ b/submodules/TelegramUI/BUILD
+@@ -445,6 +445,7 @@
+         "//submodules/TelegramUI/Components/PeerAllowedReactionsScreen",
+         "//submodules/MetalEngine",
+         "//submodules/TelegramUI/Components/DustEffect",
++        "//submodules/TelegramUI/Components/Chat/SilkBookmark",
+         "//submodules/TelegramUI/Components/PeerInfo/PeerInfoScreen",
+         "//submodules/TelegramUI/Components/Chat/ChatMessageSelectionInputPanelNode",
+         "//submodules/TelegramUI/Components/Chat/ChatQrCodeScreen",

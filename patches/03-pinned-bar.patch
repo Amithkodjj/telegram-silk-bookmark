@@ -1,0 +1,18 @@
+diff --git a/submodules/TelegramUI/Sources/ChatControllerNode.swift b/submodules/TelegramUI/Sources/ChatControllerNode.swift
+index 7846cdd0..985aacf9 100644
+--- a/submodules/TelegramUI/Sources/ChatControllerNode.swift
++++ b/submodules/TelegramUI/Sources/ChatControllerNode.swift
+@@ -4302,6 +4302,13 @@ class ChatControllerNode: ASDisplayNode, ASScrollViewDelegate {
+         return container
+     }
+ 
++    var headerPanelsBottomEdge: CGFloat? {
++        guard let view = self.headerPanelsView?.view, view.superview != nil, view.bounds.height > 0.0 else {
++            return nil
++        }
++        return view.frame.maxY
++    }
++
+     func frameForVisibleArea() -> CGRect {
+         var rect = CGRect(origin: CGPoint(x: self.visibleAreaInset.left, y: self.visibleAreaInset.top), size: CGSize(width: self.bounds.size.width - self.visibleAreaInset.left - self.visibleAreaInset.right, height: self.bounds.size.height - self.visibleAreaInset.top - self.visibleAreaInset.bottom))
+         if let inputContextPanelNode = self.inputContextPanelNode, let topItemFrame = inputContextPanelNode.topItemFrame {

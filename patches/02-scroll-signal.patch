@@ -1,0 +1,12 @@
+diff --git a/submodules/TelegramUI/Sources/Chat/ChatControllerLoadDisplayNode.swift b/submodules/TelegramUI/Sources/Chat/ChatControllerLoadDisplayNode.swift
+index 06090639..d8e1f99b 100644
+--- a/submodules/TelegramUI/Sources/Chat/ChatControllerLoadDisplayNode.swift
++++ b/submodules/TelegramUI/Sources/Chat/ChatControllerLoadDisplayNode.swift
+@@ -5294,6 +5294,7 @@ extension ChatControllerImpl {
+             guard let strongSelf = self, let historyNode, strongSelf.chatDisplayNode.historyNode === historyNode else {
+                 return
+             }
++            strongSelf.silkBookmarkView?.listDidMove()
+ 
+             // While a scroll target is held, an arrival below it lands under the input panel instead of
+             // pushing the chat up, so any hidden arrival shows the button; an ad alone still does not.

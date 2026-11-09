@@ -1,0 +1,52 @@
+diff --git a/submodules/TelegramUI/Sources/ChatController.swift b/submodules/TelegramUI/Sources/ChatController.swift
+index f32b3c16..4de1c63d 100644
+--- a/submodules/TelegramUI/Sources/ChatController.swift
++++ b/submodules/TelegramUI/Sources/ChatController.swift
+@@ -106,6 +106,7 @@ import ChatMessagePollBubbleContentNode
+ import ChatMessageItem
+ import ChatMessageItemImpl
+ import ChatMessageItemView
++import SilkBookmark
+ import ChatMessageItemCommon
+ import ChatMessageAnimatedStickerItemNode
+ import ChatMessageBubbleItemNode
+@@ -259,6 +260,7 @@ public final class ChatControllerImpl: TelegramBaseController, ChatController, G
+     let context: AccountContext
+     public internal(set) var chatLocation: ChatLocation
+     public internal(set) var subject: ChatControllerSubject?
++    var silkBookmarkView: SilkBookmarkView?
+     var initialTextInputState: ChatTextInputState?
+     
+     var botStart: ChatControllerInitialBotStart?
+@@ -7348,6 +7350,7 @@ public final class ChatControllerImpl: TelegramBaseController, ChatController, G
+         self.updateChatPresentationInterfaceState(transition: transition, interactive: false) { state in
+             return state.updatedMode(self.mode)
+         }
++        self.installSilkBookmarkIfNeeded()
+     }
+     
+     var chatDisplayNode: ChatControllerNode {
+@@ -7987,6 +7990,7 @@ public final class ChatControllerImpl: TelegramBaseController, ChatController, G
+         self.forwardSideListAppearance(.didAppear, animated: animated)
+         
+         self.didAppear = true
++        self.installSilkBookmarkIfNeeded()
+         
+         self.chatDisplayNode.historyNode.experimentalSnapScrollToItem = false
+         self.chatDisplayNode.historyNode.canReadHistory.set(self.computedCanReadHistoryPromise.get())
+@@ -8653,6 +8657,7 @@ public final class ChatControllerImpl: TelegramBaseController, ChatController, G
+         if self.currentSideListKind(presentationInterfaceState: self.presentationInterfaceState) != self.sideListButtonKind {
+             self.updateRightNavigationButtons(presentationInterfaceState: self.presentationInterfaceState, transition: .immediate)
+         }
++        self.updateSilkBookmarkLayout(layout)
+     }
+     
+     func updateChatPresentationInterfaceState(animated: Bool = true, interactive: Bool, saveInterfaceState: Bool = false, _ f: (ChatPresentationInterfaceState) -> ChatPresentationInterfaceState, completion: @escaping (ContainedViewLayoutTransition) -> Void = { _ in }) {
+@@ -8669,6 +8674,7 @@ public final class ChatControllerImpl: TelegramBaseController, ChatController, G
+             f,
+             completion: completion
+         )
++        self.updateSilkBookmarkVisibility()
+     }
+     
+     func updateItemNodesSelectionStates(animated: Bool) {
